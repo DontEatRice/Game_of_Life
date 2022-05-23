@@ -1,0 +1,90 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right,#2c5364, #203a43, #0f2027);
+}
+
+#container {
+    margin-top: 30px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: burlywood;
+    width: 70vw;
+    border-radius: 15px;
+    padding-bottom: 15px;
+}
+
+#container #title {
+    padding: 10px;
+    text-align: center;
+}
+
+#container #inputs {
+    padding: 10px;
+    width: 80%;
+    /* font-size: 1.3rem; */
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#container #inputs button {
+    padding: 5px;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    font-size: 1.3rem;
+    cursor: pointer;
+    margin-right: 10px;
+}
+#container #inputs label {
+    font-size: 1.3rem;
+}
+ 
+#container #inputs input {
+    font-size: 1.3rem;
+    margin: 0 auto;
+    padding: 5px;
+    border-radius: 0.2rem;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    /* width: 90%; */
+    border-bottom: 0.3rem solid transparent;
+    transition: all 0.3s;
+    border: 1px solid black;
+    width: 75px;
+    margin-right: 10px;
+}
+
+#container #board {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: black;
+    padding-bottom: 0.3vw;
+    border-radius: calc(1.9vw / 2)
+}
+
+#container #board .cell {
+    width: 1.9vw;
+    height: 1.9vw;
+    margin: 0.3vw 0.3vw 0 0.3vw;
+    border-radius: 50%;
+    border: 2px solid black;
+}
+
+.dead {
+    background-color: rgb(83, 43, 43);
+}
+
+.alive {
+    background-color: green;
+}
+
