@@ -12,10 +12,11 @@ body {
     position: fixed;
     top: 10px;
     left: -10px;
+    width: 10%;
 }
 
 #githubLogo img {
-    width: 10%;
+    width: 100%;
     height: auto;
 }
 
