@@ -1,0 +1,21 @@
+{
+  "name": "zad9",
+  "version": "1.0.0",
+  "description": "Game of Life implementation",
+  "main": "main.js",
+  "files": [
+    "src/"
+  ],
+  "scripts": {
+    "deploy": "npx parcel build src/index.html --public-url .",
+    "start": "npx parcel serve src/index.html"
+  },
+  "author": "Jakub Sikorski <jakub.sikorski0211@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "gh-pages": "^4.0.0",
+    "parcel-bundler": "^1.12.5",
+    "tsconfig.json": "^1.0.11",
+    "typescript": "^4.6.4"
+  }
+}
