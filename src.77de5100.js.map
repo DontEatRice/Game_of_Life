@@ -1,1 +1,0 @@
-{"version":3,"sources":["index.ts"],"names":[],"mappings":"AAAA,OAAO,CAAC,GAAR,CAAY,cAAZ;AACA,OAAO,CAAC,GAAR,CAAY,YAAZ","file":"src.77de5100.js","sourceRoot":"..\\src","sourcesContent":["console.log(\"I'm working!\")\r\nconsole.log(\"Hot reload\")"]}
