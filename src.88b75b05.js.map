@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.ts"],"names":[],"mappings":";AAAA,QAAQ,IAAI,gBACZ,QAAQ,IAAI","file":"src.88b75b05.js","sourceRoot":"..\\src","sourcesContent":["console.log(\"I'm working!\")\r\nconsole.log(\"Hot reload\")"]}
