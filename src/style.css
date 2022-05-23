@@ -8,11 +8,22 @@ body {
     background: linear-gradient(to right,#2c5364, #203a43, #0f2027);
 }
 
+#githubLogo {
+    position: fixed;
+    top: 10px;
+    left: -10px;
+}
+
+#githubLogo img {
+    width: 10%;
+    height: auto;
+}
+
 #container {
     margin-top: 30px;
     margin-right: auto;
     margin-left: auto;
-    background-color: burlywood;
+    background: linear-gradient(to bottom, #7a7680, #4d491d);
     width: 70vw;
     border-radius: 15px;
     padding-bottom: 15px;
@@ -73,10 +84,9 @@ body {
 }
 
 #container #board .cell {
-    width: 1.9vw;
-    height: 1.9vw;
+    width: 1.85vw;
+    height: 1.85vw;
     margin: 0.3vw 0.3vw 0 0.3vw;
-    /* border-radius: 50%; */
     border: 2px solid black;
 }
 
