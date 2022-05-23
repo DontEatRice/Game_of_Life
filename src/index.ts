@@ -1,5 +1,3 @@
-console.log("I'm working!")
-console.log("Hot reload")
 const NUMBER_OF_CELLS = 15*15;
 
 enum Status {
