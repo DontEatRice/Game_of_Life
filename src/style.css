@@ -76,7 +76,7 @@ body {
     width: 1.9vw;
     height: 1.9vw;
     margin: 0.3vw 0.3vw 0 0.3vw;
-    border-radius: 50%;
+    /* border-radius: 50%; */
     border: 2px solid black;
 }
 

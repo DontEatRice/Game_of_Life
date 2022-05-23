@@ -67,9 +67,11 @@ class Cell {
 class Game {
     private _cells: Cell[][]
     private intervalId?: number
+    private _isRunning: boolean
 
     constructor(cells: Cell[][]) {
         this._cells = cells;
+        this._isRunning = false;
     }
 
     run(stayAliveCond: number[], resurrectionCond: number[], interval: number) {
@@ -77,7 +79,6 @@ class Game {
             const cells = this._cells;
             for(let y = 0; y < cells.length; y++) {
                 for(let x = 0; x < cells[y].length; x++) {
-                    debugger;
                     let neighboursAlive = 0;
                     const currentCell = cells[y][x]
                     // top
@@ -86,26 +87,32 @@ class Game {
                     neighboursAlive += Cell.isAlive(cells, x-1, y) + Cell.isAlive(cells, x+1, y)
                     // bottom
                     neighboursAlive += Cell.isAlive(cells, x-1, y-1) + Cell.isAlive(cells, x, y-1) + Cell.isAlive(cells, x+1, y-1)
-
+                    
                     if (currentCell.status == Status.ALIVE && !stayAliveCond.includes(neighboursAlive))
-                        currentCell.status = Status.DEAD
+                    currentCell.status = Status.DEAD
                     else if (currentCell.status == Status.DEAD && resurrectionCond.includes(neighboursAlive))
-                        currentCell.status = Status.ALIVE
+                    currentCell.status = Status.ALIVE
                 }
             }
             Cell.applyStatusChange(cells)
         }, interval)
+        this._isRunning = true;
     }
 
     stop() {
         if (this.intervalId != undefined){
             clearInterval(this.intervalId)
             this.intervalId = undefined;
+            this._isRunning = false;
         }
     }
 
     get cells() {
         return this._cells;
+    }
+
+    isRunning() {
+        return this._isRunning
     }
 }
 
@@ -132,6 +139,7 @@ const generateCells = (): Cell[][] => {
 window.onload = () => {
     const matrix = generateCells()
     const game = new Game(matrix);
+    const gameStatus = document.querySelector('span.gameStatus') as HTMLSpanElement
 
     document.getElementById('runBtn')?.addEventListener('click', (_) => {
         console.log('clicked')
@@ -142,10 +150,19 @@ window.onload = () => {
         const stayAliveCond = formulaSplitted[0].split('').map(s => parseInt(s))
         const resurrectCond = formulaSplitted[1].split('').map(s => parseInt(s))
         game.run(stayAliveCond, resurrectCond, parseFloat(interval)*1000)
+        gameStatus.innerText = 'Running'
     })
 
     document.getElementById('stopBtn')?.addEventListener('click', (_) => {
         game.stop()
         Cell.forEach(matrix, cell => cell.enableOnClick())
+        gameStatus.innerText = ''
+    })
+
+    document.getElementById('clearBtn')?.addEventListener('click', (_) => {
+        if (!game.isRunning()) {
+            Cell.forEach(matrix, cell => cell.status = Status.DEAD)
+            Cell.applyStatusChange(matrix)
+        }
     })
 }
