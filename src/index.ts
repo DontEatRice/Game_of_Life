@@ -12,6 +12,7 @@ class Cell {
     private toggleStatus = () => {
         this.body.classList.toggle('dead')
         this.body.classList.toggle('alive')
+        this._status = this.status
     }
 
     constructor(body: HTMLDivElement) {
@@ -29,6 +30,21 @@ class Cell {
             if (cell._status != cell.status)
                 cell.toggleStatus()
         })
+    }
+
+    // Cell[y][x]
+    static isAlive(cells: Cell[][], x: number, y: number) {
+        if (y < 0)
+            y = cells.length-1
+        else if (y > cells.length-1)
+            y = 0
+        
+        if (x < 0)
+            x = cells[y].length-1
+        else if (x > cells[y].length-1)
+            x = 0
+
+        return cells[y][x].status == Status.ALIVE ? 1 : 0;
     }
 
     get status() {
@@ -59,12 +75,24 @@ class Game {
     run(stayAliveCond: number[], resurrectionCond: number[], interval: number) {
         this.intervalId = setInterval(() => {
             const cells = this._cells;
-            // for(let y = 0; y < cells.length; y++) {
-            //     for(let x = 0; x < cells[y].length; x++) {
+            for(let y = 0; y < cells.length; y++) {
+                for(let x = 0; x < cells[y].length; x++) {
+                    debugger;
+                    let neighboursAlive = 0;
+                    const currentCell = cells[y][x]
+                    // top
+                    neighboursAlive += Cell.isAlive(cells, x-1, y+1) + Cell.isAlive(cells, x, y+1) + Cell.isAlive(cells, x+1, y+1)
+                    // middle
+                    neighboursAlive += Cell.isAlive(cells, x-1, y) + Cell.isAlive(cells, x+1, y)
+                    // bottom
+                    neighboursAlive += Cell.isAlive(cells, x-1, y-1) + Cell.isAlive(cells, x, y-1) + Cell.isAlive(cells, x+1, y-1)
 
-            //     }
-            // }
-            Cell.forEach(cells, cell => cell.status = Status.ALIVE)
+                    if (currentCell.status == Status.ALIVE && !stayAliveCond.includes(neighboursAlive))
+                        currentCell.status = Status.DEAD
+                    else if (currentCell.status == Status.DEAD && resurrectionCond.includes(neighboursAlive))
+                        currentCell.status = Status.ALIVE
+                }
+            }
             Cell.applyStatusChange(cells)
         }, interval)
     }
@@ -113,7 +141,6 @@ window.onload = () => {
         const formulaSplitted = formula.split('/');
         const stayAliveCond = formulaSplitted[0].split('').map(s => parseInt(s))
         const resurrectCond = formulaSplitted[1].split('').map(s => parseInt(s))
-        console.log(interval)
         game.run(stayAliveCond, resurrectCond, parseFloat(interval)*1000)
     })
 
